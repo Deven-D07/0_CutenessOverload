@@ -22,8 +22,10 @@ namespace CutenessOverload
         // Define all the variables you want to use here
 
         Texture2D background;  // This is a Texture2D object that will hold the background picture
-        Texture2D superDogSheet;  // What's supdog?
-        Sprite superdog;  // We will load a superdog image into this sprite and make him do awesome things!
+        Texture2D Magnush;  // What's supdog?
+        Texture2D HyperGra;
+        Sprite Mags;  // We will load a superdog image into this sprite and make him do awesome things!
+        Sprite HGrav;
 
         public Game1()
         {
@@ -54,17 +56,20 @@ namespace CutenessOverload
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            background = Content.Load<Texture2D>("background");  // Load the background picture file into the 
+            background = Content.Load<Texture2D>("Desert");  // Load the background picture file into the 
                                                                  // texture.. note that under the properties for 
                                                                  // background.jpg in the Solution explorer you 
                                                                  // should see that it has the asset name of "background"
 
-            superDogSheet = Content.Load<Texture2D>("superdog");
+            Magnush = Content.Load<Texture2D>("frame91");
+            HyperGra = Content.Load<Texture2D>("frame154");
 
-            superdog = new Sprite(new Vector2(-150, 30), // Start at x=-150, y=30
-                                  superDogSheet, 
-                                  new Rectangle(164, 0, 163, 147), // Use this part of the superdog texture
-                                  new Vector2(60, 20));
+            Mags = new Sprite(new Vector2(50, 30), // Start at x=-150, y=30
+                                  Magnush, 
+                                  new Rectangle(0, 0, 100, 135), // Use this part of the superdog texture
+                                  new Vector2(0, 0));
+
+            HGrav = new Sprite(new Vector2(50, 30), HyperGra, new Rectangle(0, 0, 130, 120), new Vector2(90, 90));
 
             // Add any other initialization code here
         }
@@ -88,10 +93,11 @@ namespace CutenessOverload
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-            
+            Mags.Rotation = 0;
             // TODO: Add your update logic here
-            superdog.Update(gameTime);  // Update the superdog so he moves
-
+            HGrav.Rotation =0;
+            Mags.Update(gameTime);  // Update the superdog so he moves
+            HGrav.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -106,8 +112,10 @@ namespace CutenessOverload
             spriteBatch.Begin();
 
             // TODO: Add your drawing code here
+            
             spriteBatch.Draw(background, new Rectangle(0,0,this.Window.ClientBounds.Width,this.Window.ClientBounds.Height), Color.White); // Draw the background at (0,0) - no crazy tinting
-            superdog.Draw(spriteBatch);  // Draw the superdog!
+            Mags.Draw(spriteBatch);  // Draw the superdog!
+            HGrav.Draw(spriteBatch);
 
             spriteBatch.End();
 
