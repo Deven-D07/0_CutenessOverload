@@ -115,6 +115,9 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="X_-_Men_vs_Street_Fighter_Music_-_STORM.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CutenessOverloadContent\CutenessOverloadContent.contentproj">
