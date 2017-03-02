@@ -67,9 +67,10 @@ namespace CutenessOverload
                                                              // should see that it has the asset name of "background"
 
             player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\X_-_Men_vs_Street_Fighter_Music_-_STORM.wav";
-            player.Play();
+            
             hype.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "\\mag_hypergrav.wav";
             hype.Play();
+            player.Play();
             Magnush = Content.Load<Texture2D>("frame91");
             HyperGra = Content.Load<Texture2D>("frame154");
             Shuma = Content.Load<Texture2D>("shuma");
@@ -109,8 +110,10 @@ namespace CutenessOverload
             Mags.Rotation = 0;
             Gorath.Rotation = 0;
             HGrav2.Rotation = 0;
-            // TODO: Add your update logic here
             HGrav.Rotation =0;
+            if (Gorath.Location.X == 0 && Gorath.Location.Y == 0) {
+
+            }
             Mags.Update(gameTime);  // Update the superdog so he moves
             HGrav.Update(gameTime);
             HGrav2.Update(gameTime);
