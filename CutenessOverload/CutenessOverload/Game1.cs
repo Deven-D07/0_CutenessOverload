@@ -20,16 +20,22 @@ namespace CutenessOverload
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        // Define all the variables you want to use here
+        double x = 0;
 
+        // Define all the variables you want to use here
+        Random rand = new Random();
         Texture2D background;  // This is a Texture2D object that will hold the background picture
         Texture2D Magnush;  // What's supdog?
         Texture2D HyperGra;
         Texture2D Shuma;
+        Texture2D MagRock;
+
         Sprite Mags;  // We will load a superdog image into this sprite and make him do awesome things!
         Sprite HGrav;
         Sprite Gorath;
         Sprite HGrav2;
+        List<Sprite> Rocks;
+
         SoundPlayer player = new SoundPlayer();
         SoundPlayer hype = new SoundPlayer();
         public Game1()
@@ -57,6 +63,8 @@ namespace CutenessOverload
         /// </summary>
         protected override void LoadContent()
         {
+            Rocks = new List<Sprite>();
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -74,6 +82,8 @@ namespace CutenessOverload
             Magnush = Content.Load<Texture2D>("frame91");
             HyperGra = Content.Load<Texture2D>("frame154");
             Shuma = Content.Load<Texture2D>("shuma");
+            MagRock = Content.Load<Texture2D>("rock");
+
             Mags = new Sprite(new Vector2(50, 30), // Start at x=-150, y=30
                                   Magnush, 
                                   new Rectangle(0, 0, 100, 135), // Use this part of the superdog texture
@@ -85,6 +95,17 @@ namespace CutenessOverload
                                   Shuma,
                                   new Rectangle(0, 0, 101, 122), // Use this part of the superdog texture
                                   new Vector2(-90, -90));
+
+            for (int i = 0; i < 100; i++)
+            {
+                Rocks.Add(new Sprite(new Vector2(50, 30), // Start at x=-150, y=30
+                                      MagRock,
+                                      new Rectangle(0, 0, 40, 46), // Use this part of the superdog texture
+                                      new Vector2(rand.Next(300, 900), rand.Next(300, 900))));
+
+                
+            }
+
             // Add any other initialization code here
         }
 
@@ -110,14 +131,22 @@ namespace CutenessOverload
             Mags.Rotation = 0;
             Gorath.Rotation = 0;
             HGrav2.Rotation = 0;
-            HGrav.Rotation =0;
-            if (Gorath.Location.X == 0 && Gorath.Location.Y == 0) {
+            HGrav.Rotation = 0;
 
-            }
+            x += 0.1f;
+
+            Mags.Location = new Vector2(Mags.Location.X, (float)(30 + Math.Sin(x) * 4));
+
             Mags.Update(gameTime);  // Update the superdog so he moves
             HGrav.Update(gameTime);
             HGrav2.Update(gameTime);
             Gorath.Update(gameTime);
+
+            for (int i = 0; i < Rocks.Count; i++)
+            {
+                Rocks[i].Rotation += 0.01f; 
+                Rocks[i].Update(gameTime);
+            }
             base.Update(gameTime);
         }
 
@@ -138,6 +167,10 @@ namespace CutenessOverload
             Gorath.Draw(spriteBatch); // Draw the superdog!
             HGrav.Draw(spriteBatch);
             HGrav2.Draw(spriteBatch);
+            for (int i = 0; i < Rocks.Count; i++)
+            {
+                Rocks[i].Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);
